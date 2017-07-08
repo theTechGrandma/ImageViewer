@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import { ImageListComponent } from './image-list/image-list.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { SqlimagesComponent } from './sqlimages/sqlimages.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'image-list', },
   { path: 'image-list', component:ImageListComponent },
   { path: 'image-carousel', component:ImageCarouselComponent },
+  { path: 'sqlimages', component:SqlimagesComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 
 ];
