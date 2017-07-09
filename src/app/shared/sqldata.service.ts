@@ -10,32 +10,16 @@ import 'rxjs/add/operator/catch';
 import { IImage } from '../shared/interfaces';
 
 @Injectable()
-export class DataService {
+export class SqlDataService {
+  private query: string;
 
     baseUrl: string = '/api/image';
-
-     constructor(private http: Http) {
+    
+    constructor(private _http: Http) {
     }
 
-    getImage(id: number) : Observable<IImage> {
-        return this.http.get(this.baseUrl + '/' + id)
-                    .map((res: Response) => res.json())
-                    .catch(this.handleError);
-    }
-
-    private handleError(error: any) {
-        console.error('server error:', error); 
-        if (error instanceof Response) {
-          let errMessage = '';
-          try {
-            errMessage = error.json().error;
-          } catch(err) {
-            errMessage = error.statusText;
-          }
-          return Observable.throw(errMessage);
-          // Use the following instead if using lite-server
-          //return Observable.throw(err.text() || 'backend server error');
-        }
-        return Observable.throw(error || 'Node.js server error');
+    getImage(query){
+        return this._http.get(query)
+        .map(res => res.json());
     }
 }

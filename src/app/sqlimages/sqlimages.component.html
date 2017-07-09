@@ -1,3 +1,30 @@
-<p>
-  sqlimages works!
-</p>
+<div class="page-header">
+  <h1>Image Carousel</h1>
+</div>
+<md-card>
+  <md-input-container>
+    <input class="search" mdInput [(ngModel)]="searchQuery" name="search" placeholder="Search for images">
+  </md-input-container>
+  <br>
+  <button (click)="searchImages(searchQuery)" md-raised-button class="searchButton" type="button">Find Images</button>
+</md-card>
+
+<div *ngIf="searching">
+ <ngb-progressbar showValue="true" type="success" [value]="65"></ngb-progressbar>
+</div>
+
+<br><br>
+
+<div>
+  <div *ngIf="imagesFound">
+    <ngb-carousel [interval]="1000" [wrap]="true" [keyboard]="true" >
+        <ng-template ngbSlide *ngFor="let image of images">
+          <img class="center-block" src="{{image.webformatURL}}">
+        </ng-template>
+    </ngb-carousel>
+  </div>
+    <br>
+  <div *ngIf="emptyData" class="alert alert-danger" role="alert" role="alert">
+         <strong>Oops!</strong> No records found.
+  </div>
+</div>
