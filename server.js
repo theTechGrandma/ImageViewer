@@ -1,11 +1,12 @@
-//Initiallising node modules
-var express = require("express");
-var bodyParser = require("body-parser");
-var sql = require("mssql");
-var app = express(); 
+var express = require('express'); // Web Framework
+var bodyParser = require('body-parser');
+var sql = require('mssql'); // MS Sql Server client
+var app = express();
 
-// Body Parser Middleware
-app.use(bodyParser.json()); 
+app.use(bodyParser.json({ type: 'application/json' }));
+
+var router = express.Router();
+app.use("/api/images", router)
 
 //CORS Middleware
 app.use(function (req, res, next) {
@@ -16,74 +17,53 @@ app.use(function (req, res, next) {
     next();
 });
 
-//Setting up server
- var server = app.listen(process.env.PORT || 8081, function () {
+var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
  });
 
-//Initiallising connection string
+// Connection string parameters.
 var dbConfig = {
     user: 'sa',
     password: 'P@ssw0rd1963',
     server: 'localhost\\SQLEXPRESS01',
-    database: 'ImageDB',
+    database: 'ImageDB'
 };
 
 //Function to connect to database and execute query
-var  executeQuery = function(res, query){
+var  executeQuery = function(res, query){   
     sql.connect(dbConfig, function (err) {
-        if (err) {
+        if (err) {   
             console.log("Error while connecting database :- " + err);
             res.send(err);
         }
-        else {
+         else {
             // create Request object
             var request = new sql.Request();
             // query to the database
-            request.query(query, function (err, req) {
-                if (err) {
-                    console.log("Error while querying database :- " + err);
-                    res.send(err);
-                }
-                else {
-                    res.send(req);
-                }
-            });
+            request.query(query, function (err, rs) {
+            if (err) {
+                console.log("Error while querying database :- " + err);
+                res.send(err);
+            }
+            else {
+                res.send(rs);
+            }
+        });
         }
-      });   
+    });  
 }
 
 //GET API
-// app.get("/api/images/:id", function(req , res){
-//                 var query = "select * from [DynicsImages] WHERE ID= " + req.params.id;
-//                 executeQuery (res, query);
-// });
+router.get("/:id", function(req , res){
+                var query = "select * from [TestTable] where id = " + req.query.id;
+                executeQuery (res, query);
+});
 
-// app.get("/api/images", function(req , res){
-//                 var query = "select * from [DynicsImages]";
-//                 executeQuery (res, query);
-// });
-
-app.get("/api/images", function(req , res){
+router.get("/", function(req , res){
                 var query = "select * from [TestTable]";
                 executeQuery (res, query);
+                console.log(req.query.id);
 });
 
-//POST API
- app.post("/api/images ", function(req , res){
-                var query = "INSERT INTO [DynicsImages] (Image) VALUES (req.body.Image)";
-                executeQuery (res, query);
-});
-
-//PUT API
- app.put("/api/image/:id", function(req , res){
-                var query = "UPDATE [DynicsImages] SET Image= " + req.body.Image  +  " WHERE Id= " + req.params.id;
-                executeQuery (res, query);
-});
-
-// DELETE API
- app.delete("/api/image /:id", function(req , res){
-                var query = "DELETE FROM [DynicsImages] WHERE Id=" + req.params.id;
-                executeQuery (res, query);
-});
+module.export = router;

@@ -11,7 +11,7 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImageListComponent } from './image-list/image-list.component';
 import { ImageService } from './shared/image.service';
-import { DataService } from './shared/sqldata.service';
+import { SqlDataService } from './shared/sqldata.service';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SqlimagesComponent } from './sqlimages/sqlimages.component';
@@ -33,7 +33,7 @@ import { SqlimagesComponent } from './sqlimages/sqlimages.component';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
   ],
-  providers: [ImageService, DataService],
+  providers: [ImageService, SqlDataService],
   bootstrap: [AppComponent]
 })
 

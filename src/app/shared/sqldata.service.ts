@@ -22,4 +22,8 @@ export class SqlDataService {
         return this._http.get(query)
         .map(res => res.json());
     }
-}
+
+    //  getImage(id: number) {
+    //     return this._http.get(this.baseUrl + '/' + id)
+    //                 .map((res: Response) => res.json());
+    }
