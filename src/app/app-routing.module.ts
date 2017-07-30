@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'image-list', component:ImageListComponent },
   { path: 'image-carousel', component:ImageCarouselComponent },
   { path: 'sqlimages', component:SqlimagesComponent },
-  { path: 'sqlimages/:id', component: SqlimagesComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 
 ];
@@ -24,5 +23,6 @@ export class AppRoutingModule { }
 
 export const routableComponents = [
   ImageCarouselComponent,
-  ImageListComponent
+  ImageListComponent,
+  SqlimagesComponent
 ];

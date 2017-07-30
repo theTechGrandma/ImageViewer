@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 //Grab everything with import 'rxjs/Rx';
@@ -13,17 +14,14 @@ import { IImage } from '../shared/interfaces';
 export class SqlDataService {
   private query: string;
 
-    baseUrl: string = '/api/image';
+    private API_URL: string = environment.EXPRESS_URL;
+    baseUrl: string = '/api/images/';
     
     constructor(private _http: Http) {
     }
 
     getImage(query){
-        return this._http.get(query)
+        return this._http.get(this.API_URL + this.baseUrl + query)
         .map(res => res.json());
     }
-
-    //  getImage(id: number) {
-    //     return this._http.get(this.baseUrl + '/' + id)
-    //                 .map((res: Response) => res.json());
-    }
+}
