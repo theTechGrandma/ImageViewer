@@ -4,18 +4,17 @@ var sql = require('mssql'); // MS Sql Server client
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var app = express();
+var router = express.Router();
 
 app.use(logger('dev'));
-app.use(bodyParser.json({ type: 'application/json' }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-//app.use(express.static(__dirname  + '/src'));
 
-var router = express.Router();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/json' }));
+app.use(cookieParser());
 app.use("/api/images", router)
 
 //CORS Middleware
-app.use(function (req, res, next) {
+router.use(function (req, res, next) {
     //Enabling CORS 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -28,7 +27,6 @@ var server = app.listen(process.env.PORT || 8080, function () {
     console.log("App now running on port", port);
  });
 
-
 // Connection string parameters.
 var dbConfig = {
     user: 'sa',
@@ -37,35 +35,31 @@ var dbConfig = {
     database: 'ImageDB'
 };
 
-//Function to connect to database and execute query
-var  executeQuery = function(res, query, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
-    sql.connect(dbConfig, function (err) {
+var dbConn = new sql.ConnectionPool(dbConfig);
+var  executeQuery = function(res, query){ 
+    sql.connect(dbConfig, function (err, dbConn) {
         if (err) {   
             console.log("Error while connecting database :- " + err);
             res.send(err);
         }
          else {
-            // create Request object
-            var request = new sql.Request();
-            // query to the database
-            request.query(query, function (err, rs) {
-            if (err) {
-                console.log("Error while querying database :- " + err);
-                res.send(err);
-            }
-            else {
-                // var img = new Buffer(rs, 'base64');
-                // res.contentType('image/jpg');
-                // res.end(rs);
-                //res.end(new Buffer(rs, 'binary'));
-                res.send(rs);
-            }
-        });
+                // create Request object
+                var request = new sql.Request(dbConn);
+                // query to the database
+                request.query(query, function (err, rs) {
+                if (err) {
+                    console.log("Error while querying database :- " + err);
+                    sql.close();
+                    res.send(err);
+                    
+                }
+                else {
+                    sql.close();
+                    res.send(rs);
+                }
+            });
         }
-    });  
+    }); 
 }
 
 //GET API

@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { SqlDataService } from '../shared/sqldata.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert'
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-sqlimages',
   templateUrl: './sqlimages.component.html',
   styleUrls: ['./sqlimages.component.css']
 })
+
+@Pipe({ name: 'safe' })
 export class SqlimagesComponent implements OnInit {images: any[];
   imagesFound: boolean = false;
   searching: boolean = false;
@@ -16,14 +20,22 @@ export class SqlimagesComponent implements OnInit {images: any[];
   constructor(
     private _imageService : SqlDataService,
     private route: ActivatedRoute,
+    private _sanitizer: DomSanitizer,
     private router: Router) { }
+    transform(url) {
+      return this._sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    
 
   handleSuccess(data){
-    if (data.hits && data.hits.length > 0) {
+    if (data.recordset) {
       this.imagesFound = true;
       this.emptyData =false;
-      this.images = data.hits;
-      console.log(data.hits);
+      this.images = data.recordset;
+     
+      //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+      //            + data.recordset.base64string);
+      console.log(data.recordset);
     } else {
       this.imagesFound = false;
       this.emptyData =true;
