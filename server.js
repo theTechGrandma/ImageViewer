@@ -4,6 +4,7 @@ var sql = require('mssql'); // MS Sql Server client
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var app = express();
+var fs = require('fs')
 var router = express.Router();
 
 app.use(logger('dev'));
@@ -51,11 +52,13 @@ var  executeQuery = function(res, query){
                     console.log("Error while querying database :- " + err);
                     sql.close();
                     res.send(err);
-                    
                 }
                 else {
                     sql.close();
-                    res.send(rs);
+                    res.writeHead(200, {'Content-Type': 'image/jpeg'});
+                    var image  = new Buffer(rs.recordset[0].Image);
+                    res.end(image);
+                    console.log(image);
                 }
             });
         }
@@ -65,7 +68,7 @@ var  executeQuery = function(res, query){
 //GET API
 router.get("/:id", function(req , res){
                 var id = req.params.id;
-                var query = "select * from [DynicsImages] where ID=" + id;
+                var query = "select * from [Images] where ID=" + id;
                 executeQuery (res, query);
 });
 

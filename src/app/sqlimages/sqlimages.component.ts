@@ -28,14 +28,13 @@ export class SqlimagesComponent implements OnInit {images: any[];
     
 
   handleSuccess(data){
-    if (data.recordset) {
+    if (data) {
       this.imagesFound = true;
       this.emptyData =false;
-      this.images = data.recordset;
-     
+      this.images = data;
       //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
       //            + data.recordset.base64string);
-      console.log(data.recordset);
+      console.log(data);
     } else {
       this.imagesFound = false;
       this.emptyData =true;
@@ -60,6 +59,7 @@ export class SqlimagesComponent implements OnInit {images: any[];
       () => this.searching = false
     )
   }
+  
   ngOnInit() {
     this.emptyData = false;
   }
