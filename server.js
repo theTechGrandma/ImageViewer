@@ -55,10 +55,14 @@ var  executeQuery = function(res, query){
                 }
                 else {
                     sql.close();
-                    res.writeHead(200, {'Content-Type': 'image/jpeg'});
-                    var image  = new Buffer(rs.recordset[0].Image);
-                    res.end(image);
-                    console.log(image);
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    for (var i = 0; i < rs.recordset.length; i++) {
+                    //res.write("Id: " + rs.recordset[i].ID + " Image: " + rs.recordset[i].Image );}
+                    var image = "Id: " + rs.recordset[i].ID + " Image: " + rs.recordset[i].Image;}
+                    //var image  = new Buffer(rs.recordset);
+                    //res.type('Content-Type': 'application/json');
+                    res.end(JSON.stringify(image));
+                    //console.log(image);
                 }
             });
         }

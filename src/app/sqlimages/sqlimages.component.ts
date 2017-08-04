@@ -12,7 +12,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 @Pipe({ name: 'safe' })
-export class SqlimagesComponent implements OnInit {images: any[];
+export class SqlimagesComponent implements OnInit {
+  images: any[];
+  image: any;
   imagesFound: boolean = false;
   searching: boolean = false;
   emptyData: boolean = false;
@@ -22,16 +24,17 @@ export class SqlimagesComponent implements OnInit {images: any[];
     private route: ActivatedRoute,
     private _sanitizer: DomSanitizer,
     private router: Router) { }
+
     transform(url) {
       return this._sanitizer.bypassSecurityTrustResourceUrl(url);
     }
     
 
   handleSuccess(data){
-    if (data) {
+    if (data.hits) {
       this.imagesFound = true;
       this.emptyData =false;
-      this.images = data;
+      this.images = data.hits;
       //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
       //            + data.recordset.base64string);
       console.log(data);
@@ -53,13 +56,14 @@ export class SqlimagesComponent implements OnInit {images: any[];
 
   searchImages(query: string){
     this.searching = true;
+    console.log("Got to component");
     return this._imageService.getImage(query).subscribe(
-      data => this.handleSuccess(data),
+      data => this.handleSuccess(console.log(data)),
       error => this.handleError,
       () => this.searching = false
     )
   }
-  
+
   ngOnInit() {
     this.emptyData = false;
   }
