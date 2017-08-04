@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { ResponseContentType } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -18,7 +19,7 @@ export class SqlDataService {
     
     constructor(private _http: Http) {}
    getImage(query){
-       return this._http.get(this.API_URL + this.baseUrl + query)
-         .map((res: Response) => res.json());
+       return this._http.get(this.API_URL + this.baseUrl + query, {responseType: ResponseContentType.Blob})
+       .map(response => (<Response>response).blob());
    }
 }
