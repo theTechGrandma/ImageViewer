@@ -56,7 +56,7 @@ var  executeQuery = function(res, query){
                 else {
                     sql.close();
                     res.writeHead(200, {'Content-Type': 'image/jpeg'});
-                    var image  = new Buffer(rs.recordset[0].Image);
+                    var image  = new Buffer(rs.recordset[0].Image, 'base64');
                     res.end(image);
                 }
             });

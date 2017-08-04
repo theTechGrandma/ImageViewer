@@ -18,7 +18,9 @@
 <div>
   <div *ngIf="imagesFound">
     <ngb-carousel [interval]="1000" [wrap]="true" [keyboard]="true" >
-          <img class="center-block" src="data:image/jpg;base64,{{images}}">
+        <ng-template ngbSlide *ngFor="let image of images">
+          <img class="center-block" src="data:image/jpg;base64{{image}}">
+        </ng-template>
     </ngb-carousel>
   </div>
     <br>
