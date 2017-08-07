@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Pipe, PipeTransform } from '@angular/core';
+import { sharp } from 'sharp';
 
 @Component({
   selector: 'app-sqlimages',
@@ -30,13 +31,13 @@ export class SqlimagesComponent implements OnInit {
     
 
   handleSuccess(data){
-    if (data) {
-      //console.log(data);
+    if (data.images.length > 0) {
+      console.log(data);
       this.imagesFound = true;
       this.emptyData =false;
       this.images = data.images;
-      //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-      //            + data.recordset.base64string);
+      sharp(data.images)
+      .resize(200);
       console.log("It handled");
     } else {
       this.imagesFound = false;
@@ -58,7 +59,7 @@ export class SqlimagesComponent implements OnInit {
     this.searching = true;
     console.log("Got to component");
     return this._imageService.getImage(query).subscribe(
-      data => this.handleSuccess(console.log(data)),
+      data => this.handleSuccess(data),
       error => this.handleError,
       () => this.searching = false
     )

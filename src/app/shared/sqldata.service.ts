@@ -18,8 +18,7 @@ export class SqlDataService {
     constructor(private _http: Http) {}
 
     getImage(query){
-       return this._http.get(this.API_URL + this.baseUrl + query) //, {responseType: ResponseContentType.Blob})
+      return this._http.get(this.API_URL + this.baseUrl + query)
        .map(res => res.json());
-       //.map(response => (<Response>response).blob());
    }
 }
