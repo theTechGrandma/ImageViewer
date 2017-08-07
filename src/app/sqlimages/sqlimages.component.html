@@ -18,13 +18,8 @@
 <div>
   <div *ngIf="imagesFound">
     <ngb-carousel [interval]="1000" [wrap]="true" [keyboard]="true" >
-<<<<<<< HEAD
       <ng-template ngbSlide *ngFor="let image of images">
           <img class="center-block" src="data:image/jpg;base64,{{image.image}}">
-=======
-        <ng-template ngbSlide *ngFor="let image of images">
-          <img class="center-block" src="data:image/jpg;base64{{image}}">
->>>>>>> c4edc23103d3d630f7ae23019e6f46b09e90b15a
         </ng-template>
     </ngb-carousel>
   </div>
