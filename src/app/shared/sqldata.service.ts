@@ -8,8 +8,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map'; 
 import 'rxjs/add/operator/catch';
 
-import { IImage } from '../shared/interfaces';
-
 @Injectable()
 export class SqlDataService {
     private query: string;
@@ -18,8 +16,10 @@ export class SqlDataService {
     baseUrl: string = '/api/images/';
     
     constructor(private _http: Http) {}
-   getImage(query){
-       return this._http.get(this.API_URL + this.baseUrl + query, {responseType: ResponseContentType.Blob})
-       .map(response => (<Response>response).blob());
+
+    getImage(query){
+       return this._http.get(this.API_URL + this.baseUrl + query) //, {responseType: ResponseContentType.Blob})
+       .map(res => res.json());
+       //.map(response => (<Response>response).blob());
    }
 }

@@ -14,7 +14,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'safe' })
 export class SqlimagesComponent implements OnInit {
   images: any[];
-  image: any;
   imagesFound: boolean = false;
   searching: boolean = false;
   emptyData: boolean = false;
@@ -32,10 +31,11 @@ export class SqlimagesComponent implements OnInit {
 
   handleSuccess(data){
     if (data) {
-      console.log(data);
+      //console.log(data);
       this.imagesFound = true;
       this.emptyData =false;
-      this.images = data.image;
+      console.log(data);
+      this.images = data.images;
       //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
       //            + data.recordset.base64string);
       console.log("It handled");

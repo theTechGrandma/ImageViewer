@@ -31,9 +31,10 @@ var server = app.listen(process.env.PORT || 8080, function () {
 // Connection string parameters.
 var dbConfig = {
     user: 'sa',
-    password: 'P@ssw0rd1963',
-    server: 'localhost\\SQLEXPRESS01',
-    database: 'ImageDB'
+    password: 'Dynics620',
+    server: '192.168.70.35',
+    database: 'ImagesDB'
+    
 };
 
 var dbConn = new sql.ConnectionPool(dbConfig);
@@ -42,6 +43,7 @@ var  executeQuery = function(res, query){
         if (err) {   
             console.log("Error while connecting database :- " + err);
             res.send(err);
+            sql.close();
         }
          else {
                 // create Request object
@@ -55,9 +57,9 @@ var  executeQuery = function(res, query){
                 }
                 else {
                     sql.close();
-                    res.writeHead(200, {'Content-Type': 'image/jpeg'});
-                    var image  = new Buffer(rs.recordset[0].Image);
-                    res.end(image);
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    var image  = new Buffer(rs.recordset[0].Image).toString("base64");
+                    res.end(JSON.stringify({ images: [ { id: 0, image : image } ] }));
                 }
             });
         }
