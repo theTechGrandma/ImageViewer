@@ -34,8 +34,12 @@ export class SqlimagesComponent implements OnInit {
       //console.log(data);
       this.imagesFound = true;
       this.emptyData =false;
+<<<<<<< HEAD
       console.log(data);
       this.images = data.images;
+=======
+      this.images = data;
+>>>>>>> c4edc23103d3d630f7ae23019e6f46b09e90b15a
       //this.images = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
       //            + data.recordset.base64string);
       console.log("It handled");
@@ -58,9 +62,8 @@ export class SqlimagesComponent implements OnInit {
   searchImages(query: string){
     this.searching = true;
     console.log("Got to component");
-    
     return this._imageService.getImage(query).subscribe(
-      data => this.handleSuccess(data),
+      data => this.handleSuccess(console.log(data)),
       error => this.handleError,
       () => this.searching = false
     )
