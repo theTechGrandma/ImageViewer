@@ -1,25 +1,7 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-  <a class="navbar-brand" href="#">Dynics Image Viewer</a>
-  <ul class="nav navbar-nav mr-auto">
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" [routerLink]="['/image-list']">Image List</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" [routerLink]="['/image-carousel']">Image Carousel<span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" [routerLink]="['/sqlimages']">SQL Images</a>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav">
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </ul>
-</nav>
-  <main>
-    <section>
-      <router-outlet></router-outlet>
-    </section>
-  </main>
+<app-navbar
+   [NavbarBrand]        = "NavbarBrand"
+   [NavbarItems]        = "NavbarItems"
+   (NavbarSearchSubmit) = "OnNavbarSearchSubmit($event)"
+></app-navbar>
+ 
+<router-outlet></router-outlet>

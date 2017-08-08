@@ -1,0 +1,40 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="position:relative">
+
+    <!-- Bars icon, hidden on medium and larger screens -->
+    <span 
+        class="fa fa-bars fa-2x hidden-md-up pull-xs-left bg-inverse" 
+        style="color:white; border:none; margin-right: 10px"
+        (click)="toggleMenu()"
+    ></span>
+
+    <!-- The navbar branding, {{NavbarBrand}} text @Input() from parent App component -->
+    <a class="navbar-brand" routerLink="">{{NavbarBrand}}</a>
+
+    <ul class="nav navbar-nav " [ngClass]="{ 'hidden-sm-down': HideExpandedNavBar }">
+        <li 
+            template   = "ngFor let item of NavbarItems; let idx = index" 
+            class      = "nav-item" 
+            (mouseout) = "closeOnMouseOut(idx)"
+            
+        >
+            <a class="nav-link" routerLink="{{item.href}}" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="handleMenuClick()">{{item.label}}</a>  
+        </li>
+    </ul>
+
+    <span 
+        class   = "fa fa-search fa-2x  bg-inverse hidden-md-up" 
+        style   = "color:white; border:none; position: absolute; right:10px; top:7px"
+        (click) = "HideSearchInput = false"
+    ></span>
+
+    <form 
+        class="form-inline" 
+        style="position: absolute; right: 5px; top: 10px; margin-left:0px"
+        [ngClass]="{ 'hidden-sm-down': HideSearchInput }"
+        (ngSubmit)="onSearchSubmit(NavbarSearch)"
+    >
+        <input class="form-control" type="text" placeholder="Search" name="SearchText" [(ngModel)]="NavbarSearch.SearchText">
+        <button class="btn  btn-primary " type="submit" (click)="HideSearchInput = true">Search</button>
+    </form> 
+
+</nav>

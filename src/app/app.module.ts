@@ -15,13 +15,15 @@ import { SqlDataService } from './shared/sqldata.service';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SqlimagesComponent } from './sqlimages/sqlimages.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routableComponents,
     PageNotFoundComponent,
-    SqlimagesComponent
+    SqlimagesComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

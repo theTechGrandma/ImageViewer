@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SqlDataService } from '../shared/sqldata.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-sqlimages',
@@ -9,14 +10,21 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert';
   styleUrls: ['./sqlimages.component.css']
 })
 
-export class SqlimagesComponent implements OnInit {
+export class SqlimagesComponent {
   images: any[];
   imagesFound: boolean = false;
   searching: boolean = false;
   emptyData: boolean = false;
+  private SearchText : string;
+  searchText: string;
 
   constructor(
-    private _imageService : SqlDataService) { }
+    private _imageService : SqlDataService,
+    public route: ActivatedRoute,
+    public router: Router) {
+      this.searchText = route.snapshot.params['id'];
+      console.log("searchText = " + this.searchText)
+     }
     
   handleSuccess(data){
     if (data.images.length > 0) {
@@ -40,19 +48,18 @@ export class SqlimagesComponent implements OnInit {
   popAlert(p: NgbAlert): void {
     p.close;
   }
-
-  searchImages(query: string){
-    this.searching = true;
-    console.log("Got to component");
-    
-    return this._imageService.getImage(query).subscribe(
-      data => this.handleSuccess(data),
-      error => this.handleError,
-      () => this.searching = false
-    )
-  }
-
+  
   ngOnInit() {
     this.emptyData = false;
+    console.log("search reached")
+        this.route.params
+          .map(params => params['id'])
+          .subscribe((SearchText) => {
+             return this._imageService.getImage(SearchText).subscribe(
+              data => this.handleSuccess(data),
+              error => this.handleError,
+              () => this.searching = false
+            )
+      });
   }
 }
