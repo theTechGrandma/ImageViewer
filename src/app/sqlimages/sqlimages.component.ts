@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SqlDataService } from '../shared/sqldata.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap/alert/alert';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Pipe, PipeTransform } from '@angular/core';
-import { sharp } from 'sharp';
 
 @Component({
   selector: 'app-sqlimages',
@@ -12,7 +9,6 @@ import { sharp } from 'sharp';
   styleUrls: ['./sqlimages.component.css']
 })
 
-@Pipe({ name: 'safe' })
 export class SqlimagesComponent implements OnInit {
   images: any[];
   imagesFound: boolean = false;
@@ -20,24 +16,14 @@ export class SqlimagesComponent implements OnInit {
   emptyData: boolean = false;
 
   constructor(
-    private _imageService : SqlDataService,
-    private route: ActivatedRoute,
-    private _sanitizer: DomSanitizer,
-    private router: Router) { }
-
-    transform(url) {
-      return this._sanitizer.bypassSecurityTrustResourceUrl(url);
-    }
+    private _imageService : SqlDataService) { }
     
-
   handleSuccess(data){
     if (data.images.length > 0) {
       console.log(data);
       this.imagesFound = true;
       this.emptyData =false;
       this.images = data.images;
-      sharp(data.images)
-      .resize(200);
       console.log("It handled");
     } else {
       this.imagesFound = false;
@@ -58,6 +44,7 @@ export class SqlimagesComponent implements OnInit {
   searchImages(query: string){
     this.searching = true;
     console.log("Got to component");
+    
     return this._imageService.getImage(query).subscribe(
       data => this.handleSuccess(data),
       error => this.handleError,

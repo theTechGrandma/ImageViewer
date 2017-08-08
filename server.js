@@ -1,17 +1,11 @@
 var express = require('express'); // Web Framework
 var bodyParser = require('body-parser');
 var sql = require('mssql'); // MS Sql Server client
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var app = express();
-var fs = require('fs')
 var router = express.Router();
-
-app.use(logger('dev'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: 'application/json' }));
-app.use(cookieParser());
 app.use("/api/images", router)
 
 //CORS Middleware

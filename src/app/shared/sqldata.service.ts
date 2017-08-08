@@ -12,7 +12,6 @@ import 'rxjs/add/operator/catch';
 export class SqlDataService {
     private query: string;
     private API_URL: string = environment.EXPRESS_URL;
-    imageData: any;
     baseUrl: string = '/api/images/';
     
     constructor(private _http: Http) {}
