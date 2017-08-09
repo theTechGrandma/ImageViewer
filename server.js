@@ -51,11 +51,11 @@ var  executeQuery = function(res, query){
                 else {
                     sql.close();
                     res.writeHead(200, {'Content-Type': 'application/json'});
+                    var images = [];
                     for (var i = 0; i < rs.recordset.length; i++) {
-                        var id = rs.recordset[i].ID.toString();
-                        var image = new Buffer(rs.recordset[i].Image).toString("base64");
+                        images.push({id: rs.recordset[i].ID.toString(), image : new Buffer(rs.recordset[i].Image).toString("base64")});
                     };
-                    res.end(JSON.stringify({ images: [ { id: id, image : image } ] }));
+                    res.end(JSON.stringify({ images }));
                 }
             });
         }

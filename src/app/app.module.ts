@@ -15,7 +15,8 @@ import { SqlDataService } from './shared/sqldata.service';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SqlimagesComponent } from './sqlimages/sqlimages.component';
-import { NavbarComponent } from './navbar/navbar.component';
+//import { NavbarComponent } from './navbar/navbar.component';
+import { MessageService } from './shared/message.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     routableComponents,
     PageNotFoundComponent,
     SqlimagesComponent,
-    NavbarComponent
+    //NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
   ],
-  providers: [ImageService, SqlDataService],
+  providers: [ImageService, SqlDataService, MessageService],
   bootstrap: [AppComponent]
 })
 

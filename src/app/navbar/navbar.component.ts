@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MessageService } from '../shared/message.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,17 +8,26 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent{private HideExpandedNavBar: boolean = true;
  private HideSearchInput: boolean = true;
-
  private innerSearchInputText: string = '';
-
-  private NavbarSearch: any = {};
+ private NavbarSearch: any = {};
 
   @Input() NavbarBrand : string;
   @Input() NavbarItems : Array<any>;
 
   @Output() NavbarSearchSubmit = new EventEmitter<any>();
 
- constructor() {}
+ constructor(private messageService: MessageService) {}
+
+ sendMessage(): void {
+      // send message to subscribers via observable subject
+      this.messageService.sendMessage('Message from Home Component to App Component!');
+      console.log("sent message");
+}
+ 
+clearMessage(): void {
+    // clear message
+    this.messageService.clearMessage();
+}
 
  toggleMenu() {
   this.HideExpandedNavBar = !this.HideExpandedNavBar;
@@ -30,8 +40,9 @@ export class NavbarComponent{private HideExpandedNavBar: boolean = true;
  }
 
  onSearchSubmit(formvalue:any) {
-    this.NavbarSearchSubmit.emit(formvalue.SearchText);
-    formvalue.SearchText = "";
+   //this.sendMessage();
+   this.NavbarSearchSubmit.emit(formvalue.SearchText);
+   formvalue.SearchText = "";
  }
 
   handleMenuClick(event:any) {

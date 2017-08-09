@@ -1,5 +1,25 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <a class="navbar-brand" href="#">Dynics Image Viewer</a>
+  <ul class="nav navbar-nav mr-auto">
+    <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/image-list']">Image List</a>
+    </li>
+    <!-- <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/image-carousel']">Image Carousel<span class="sr-only">(current)</span></a>
+    </li> -->
+    <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/sqlimages']">Image Carousel</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav">
+    <form class="form-inline my-2 my-lg-0">
+      <input name="imageList" class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="searchQuery">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchImages(searchQuery)">Search</button>
+    </form>
+  </ul>
+</nav>
 <div class="page-header">
-  <h1>Image List</h1>
+  <h2>Image List</h2>
 </div>
 <md-card>
   <md-input-container>

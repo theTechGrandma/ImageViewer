@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'image-list', },
   { path: 'image-list', component:ImageListComponent },
   { path: 'image-carousel', component:ImageCarouselComponent },
-  { path: 'sqlimages/:id', component:SqlimagesComponent },
+  { path: 'sqlimages', component:SqlimagesComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 
 ];
