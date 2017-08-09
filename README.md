@@ -8,7 +8,7 @@ To install this application, you need:
 1. Nodejs - Available at https://nodejs.org/en/
 2. Visual Studio Code - https://code.visualstudio.com/download
 3. Access to the repo at https://proviewds.visualstudio.com/DynicsImageViewer
-4. Follow these instructions to set up Git in VS Code to clone the project - https://marketplace.visualstudio.com/items?itemName=ms-vsts.team
+4. Follow these instructions to set up VSO (aka VSTS) in VS Code to clone the project - https://marketplace.visualstudio.com/items?itemName=ms-vsts.team
 5. In VS Code, Pull the project.
 6. In VS Code, at the root, run "npm install" (without the quotes). This pulls down all the packages needed to run the app.
 7. In a terminal session, run "ng serve" (without the quotes). This serves up the content using node.
