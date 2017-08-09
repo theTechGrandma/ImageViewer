@@ -14,7 +14,7 @@
   <ul class="nav navbar-nav">
     <form class="form-inline my-2 my-lg-0">
       <input name="sqlimages" class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="searchQuery">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchImages(searchQuery)">Search</button>
+      <button class="btn btn-primary" type="submit" (click)="searchImages(searchQuery)">Search</button>
     </form>
   </ul>
 </nav>
@@ -25,10 +25,10 @@
  <ngb-progressbar showValue="true" type="success" [value]="65"></ngb-progressbar>
 </div>
 <div>
-  <div *ngIf="imagesFound">
-    <ngb-carousel [interval]="1000" [wrap]="true" [keyboard]="true" >
+  <div *ngIf="imagesFound" class="carousel-inner">
+    <ngb-carousel [interval]="1500" [wrap]="true" [keyboard]="true" >
       <ng-template ngbSlide *ngFor="let image of images">
-          <img class="center" style="max-height:400px; margin:0 auto;" src="data:image/jpg;base64,{{image.image}}">
+          <img src="data:image/jpg;base64,{{image.image}}">
           <div class="carousel-caption">
                 <h4>Serial# {{image.id}}</h4>
             </div>

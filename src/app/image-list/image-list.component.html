@@ -14,22 +14,13 @@
   <ul class="nav navbar-nav">
     <form class="form-inline my-2 my-lg-0">
       <input name="imageList" class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="searchQuery">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchImages(searchQuery)">Search</button>
+      <button class="btn btn-primary" type="submit" (click)="searchImages(searchQuery)">Search</button>
     </form>
   </ul>
 </nav>
 <div class="page-header">
   <h2>Image List</h2>
 </div>
-<md-card>
-  <md-input-container>
-    <input class="search" mdInput [(ngModel)]="searchQuery"
-    name="search" placeholder="Search for images">
-  </md-input-container>
-  <br>
-  <button (click)="searchImages(searchQuery)"
-    md-raised-button class="searchButton" type="button">Find Images</button>
-</md-card>
 
 <div *ngIf="searching">
   <md-progress-bar mode="indeterminate"></md-progress-bar>

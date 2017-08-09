@@ -3,3 +3,35 @@ img.center {
   margin-left: auto;
   margin-right: auto;
 }
+
+h2 {
+    text-align: center;
+}
+
+.navbar-brand {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color:  #72a4db;
+}
+
+.image-container{
+  width: 300px;
+  min-height: 100px;
+  max-width: 300px;
+  margin: 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+.carousel-inner{
+    max-height: 800px;
+    max-width: 800px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.item, img{
+    height: 100% !important;
+    width:  100% !important; 
+    border: 1px solid blue;
+}
