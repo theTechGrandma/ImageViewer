@@ -26,7 +26,7 @@
 </div>
 <div>
   <div *ngIf="imagesFound" class="carousel-inner">
-    <ngb-carousel [interval]="1500" [wrap]="true" [keyboard]="true" >
+    <ngb-carousel [interval]="false" [wrap]="true" [keyboard]="true" >
       <ng-template ngbSlide *ngFor="let image of images">
           <img src="data:image/jpg;base64,{{image.image}}">
           <div class="carousel-caption">

@@ -26,3 +26,19 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To install this application, you need:
+
+1. Nodejs - Available at https://nodejs.org/en/
+2. Visual Studio Code - https://code.visualstudio.com/download
+3. Access to the repo at https://proviewds.visualstudio.com/DynicsImageViewer
+4. Follow these instructions to set up Git in VS Code to clone the project - https://marketplace.visualstudio.com/items?itemName=ms-vsts.team
+5. In VS Code, Pull the project.
+6. In VS Code, at the root, run "npm install" (without the quotes). This pulls down all the packages needed to run the app.
+7. In a terminal session, run "ng serve" (without the quotes). This serves up the content using node.
+8. Add a new terminal session, and run "node server" (without the quotes). This starts up the server component. 
+9. Open a new brower, and navigate to "http://localhost:4200.
+10 The app should be served up.
+
+Tips:
+1. In server.js, change the sql server credentials for the server you are connecting to.
+2. There is a database set up on SQLDEV, called ImagesDB.
