@@ -1,4 +1,4 @@
-# DynicsImageViewer
+# ImageViewer
 
 
 ## To set up the image Viewer
