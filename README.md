@@ -11,7 +11,7 @@ To install this application, you need:
 4. In a terminal session, run "ng serve" (without the quotes). This serves up the content using node.
 5. Add a new terminal session, and run "node server" (without the quotes). This starts up the server component. 
 6. Open a new brower, and navigate to "http://localhost:4200.
-7 The app should be served up.
+7. The app should be served up.
 
 Tips:
 1. In server.js, change the sql server credentials for the server you are connecting to.
