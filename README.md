@@ -18,7 +18,7 @@ To install this application, you need:
 
 Tips:
 1. In server.js, change the sql server credentials for the server you are connecting to.
-2. There is a database set up on SQLDEV, called ImagesDB.
+2. Set up a SQL db called ImagesDB.
 
 ## More about Angular-cli commands
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.5.
